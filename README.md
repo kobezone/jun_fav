@@ -34,7 +34,9 @@ git config --global alias.br branch
 - antfu https://github.com/antfu
 - 黄佚 https://github.com/ustbhuangyi/
 -  ssh sl1673495 https://github.com/sl1673495/
-- Tw93   https://github.com/tw93   个人博客: https://tw93.fun/
+- Tw93   https://github.com/tw93     
+> - 个人博客: https://tw93.fun/
+> - 潮流周刊: https://weekly.tw93.fun/
 
 
 
