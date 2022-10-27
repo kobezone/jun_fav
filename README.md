@@ -1,6 +1,7 @@
 # jun_fav
-喜欢的网页收藏
-工具网页 等
+记录喜欢的网页收藏 工具网页 等
+大佬的博客地址等
+
 ## 语雀 
 常见网页收藏 
 - [window&mac软件下载网站 好玩工具网站](https://www.yuque.com/docs/share/57694e28-6bc3-4545-838f-7778bf04bae5?#) 《常用网页收藏》
@@ -16,6 +17,16 @@
 > - [如何杜绝一句话需求？](https://www.yuque.com/barretlee/thinking/biwewk)
 > -[[博客](https://www.barretlee.com/entry/)]
 > - [https://www.barretlee.com/entry/](https://www.barretlee.com/entry/)
+### 廖雪峰 https://www.liaoxuefeng.com/
+个人常用的推荐 git教程中的alias 新机器git必备的 
+感觉不执行这几行 都不会使用`git-bash`了
+```bash
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+
+```
 
 ## Github
 - yyx990803 尤雨溪 https://github.com/yyx990803
