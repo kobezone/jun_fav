@@ -1,6 +1,6 @@
 # 俄罗斯方块：
-1 http://guozhivip.com/fun/els/
-2 https://chvin.github.io/react-tetris/
+- http://guozhivip.com/fun/els/
+- https://chvin.github.io/react-tetris/
 
 # 打砖块：
 https://yangyunhe369.github.io/h5-game-blockBreaker/
