@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>浏览器指纹生成器</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #fingerprint { 
+            word-wrap: break-word;
+            background: #f0f0f0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h2>浏览器指纹生成器</h2>
+    <div id="fingerprint"></div>
+
+    <script>
+        // 哈希生成函数（简易版）
+        function cyrb53(str, seed = 0) {
+            let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+            for (let i = 0, ch; i < str.length; i++) {
+                ch = str.charCodeAt(i);
+                h1 = Math.imul(h1 ^ ch, 2654435761);
+                h2 = Math.imul(h2 ^ ch, 1597334677);
+            }
+            h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+            h2 = Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+            return (h2 >>> 0).toString(16).padStart(8,0)+(h1 >>> 0).toString(16).padStart(8,0);
+        }
+
+        // 收集指纹信息
+        function generateFingerprint() {
+            const fingerprintData = {
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                screen: {
+                    width: screen.width,
+                    height: screen.height,
+                    colorDepth: screen.colorDepth
+                },
+                hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
+                deviceMemory: navigator.deviceMemory || 'unknown',
+                plugins: Array.from(navigator.plugins).map(p => p.name).join(','),
+                webgl: (() => {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        return canvas.getContext('webgl').getParameter(37445);
+                    } catch(e) { return 'unsupported'; }
+                })(),
+                canvas: (() => {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        return canvas.toDataURL();
+                    } catch(e) { return 'error'; }
+                })(),
+                fonts: (() => {
+                    const fonts = [
+                        'Arial', 'Times New Roman', 'Courier New', 
+                        'Verdana', 'Comic Sans MS', 'UnknownFontTest'
+                    ];
+                    return fonts.filter(font => {
+                        return document.fonts.check(`12px "${font}"`);
+                    }).join(',');
+                })(),
+                touchSupport: 'ontouchstart' in window,
+                doNotTrack: navigator.doNotTrack || 'unsupported'
+            };
+
+            // 生成哈希指纹
+            const dataString = JSON.stringify(fingerprintData);
+            const fingerprintHash = cyrb53(dataString);
+            
+            // 显示结果
+            document.getElementById('fingerprint').innerHTML = `
+                <strong>指纹哈希值：</strong>${fingerprintHash}
+
+
+                <strong>原始数据：</strong><pre>${JSON.stringify(fingerprintData, null, 2)}</pre>
+            `;
+        }
+
+        generateFingerprint();
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片转CSS渲染代码</title>
+    <style>
+        #preview {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="upload" accept="image/*">
+    <div id="preview"></div>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(event) {
+                const base64 = event.target.result;
+                const cssCode = `.image-box {
+    width: 300px;
+    height: 200px;
+    background-image: url(${base64});
+    background-size: cover;
+}`;
+                
+                // 实时预览
+                document.getElementById('preview').style.backgroundImage = `url(${base64})`;
+                document.getElementById('output').innerHTML = `<pre>${cssCode}</pre>`;
+            };
+            
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
