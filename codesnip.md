@@ -164,3 +164,10 @@ PerformanceObserver 用于监听性能相关的指标，如资源加载时间、
 监控长任务和用户交互延迟。
 
 <img src="./assets/images/performanceObserver.webp" alt="MutationObserver" width="1080px" height="1195px" style="display: block; margin: auto;">  
+
+
+# removeHTMLTag
+```js   
+const removeHTMLTag = (fragment) => new DomParser().parseFromString(fragment, 'text/html').body.textContent || ''
+
+```
